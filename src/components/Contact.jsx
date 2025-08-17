@@ -35,7 +35,14 @@ export const Contact = () => {
           Get In Touch
         </h2>
 
-        <form className="flex flex-col gap-4 m-8" onSubmit={handleFormSubmit}>
+        <form
+          name="contact"
+          method="POST"
+          data-netify="true"
+          className="flex flex-col gap-4 m-8"
+          onSubmit={handleFormSubmit}
+        >
+          <input type="hidden" name="form-name" value="contact" />
           {/* Name */}
           <div className="flex items-center bg-accent1 rounded-lg px-3 py-2 shadow-md">
             <IoIosContact className="text-sandy text-xl mr-2" />
