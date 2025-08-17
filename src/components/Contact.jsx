@@ -17,15 +17,19 @@ export const Contact = () => {
   const handleFormSubmit = e => {
     e.preventDefault();
 
-    const trimmedEntry = {
-      name: userInput.name.trim(),
-      email: userInput.email.trim(),
-      message: userInput.message.trim(),
-    };
+    const form = e.target;
+    const data = new FormData(form);
 
-    console.log(trimmedEntry); // replace with Formsubmit or backend call
+    fetch("/", {
+      method: "POST",
+      body: data,
+    })
+      .then(() => {
+        alert("Message sent");
+        setUserInput({ name: "", email: "", message: "" });
+      })
 
-    setUserInput({ name: "", email: "", message: "" });
+      .catch(() => alert("Failed to send message"));
   };
 
   return (
