@@ -38,7 +38,7 @@ export const Contact = () => {
         <form
           name="contact"
           method="POST"
-          data-netify="true"
+          data-netlify="true"
           className="flex flex-col gap-4 m-8"
           onSubmit={handleFormSubmit}
         >
