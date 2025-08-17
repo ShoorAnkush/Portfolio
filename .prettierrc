@@ -1,0 +1,9 @@
+{
+  "printWidth": 80,
+  "jsxBracketSameLine": false,
+  "jsxSingleQuote": false,
+  "bracketSpacing": true,
+  "arrowParens": "avoid",
+  "proseWrap": "preserve",
+  "trailingComma": "es5"
+}

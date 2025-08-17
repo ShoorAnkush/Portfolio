@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --color-darkbg: #00292f;
+  --color-darkcard: #13202b;
+  --color-cover: #003239;
+  --color-accent1: #003f47;
+  --color-accent2: #00373f;
+  --color-accent3: #2c2c38;
+  --color-accent4: #ffba7c;
+  --color-peach: #f0daa6;
+  --color-sandy: #f5a877;
+  --color-card: #147b7a;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scroll-momentum {
+  -webkit-overflow-scrolling: touch;
+}
