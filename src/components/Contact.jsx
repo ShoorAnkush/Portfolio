@@ -9,6 +9,8 @@ export const Contact = () => {
     message: "",
   });
 
+  const [contactMessage, setContactMessage] = useState(false);
+
   const handleChange = e => {
     const { name, value } = e.target;
     setUserInput(prev => ({ ...prev, [name]: value }));
@@ -25,15 +27,22 @@ export const Contact = () => {
       body: data,
     })
       .then(() => {
-        alert("Message sent");
+        setContactMessage(prev => !prev);
         setUserInput({ name: "", email: "", message: "" });
+
+        setTimeout(() => {
+          setContactMessage(prev => !prev);
+        }, 6000);
       })
 
       .catch(() => alert("Failed to send message"));
   };
 
+  const dismissHandle = () => {
+    setContactMessage(prev => !prev);
+  };
   return (
-    <section className="w-full h-full flex bg-darkbg px-4">
+    <section className="w-full h-full flex bg-darkbg">
       <div className="w-full m-6">
         <h2 className="text-3xl font-bold text-peach mb-8 tracking-wide">
           Get In Touch
@@ -51,7 +60,7 @@ export const Contact = () => {
           <div className="flex items-center bg-accent1 rounded-lg px-3 py-2 shadow-md">
             <IoIosContact className="text-sandy text-xl mr-2" />
             <input
-              className="w-full bg-accent1 text-white placeholder-gray-400 outline-none font-medium"
+              className=" bg-accent1 text-white placeholder-gray-400 outline-none font-medium"
               name="name"
               placeholder="Name"
               value={userInput.name}
@@ -64,7 +73,7 @@ export const Contact = () => {
           <div className="flex items-center bg-accent1 rounded-lg px-3 py-2 shadow-md">
             <MdOutlineAlternateEmail className="text-sandy text-xl mr-2" />
             <input
-              className="w-full bg-accent1 text-white placeholder-gray-400 outline-none font-medium"
+              className=" bg-accent1 text-white placeholder-gray-400 outline-none font-medium"
               name="email"
               type="email"
               placeholder="Email"
@@ -78,7 +87,7 @@ export const Contact = () => {
           <div className="flex items-start bg-accent1 rounded-lg px-3 py-2 shadow-md">
             <MdEmail className="text-sandy text-xl mr-2 mt-1" />
             <textarea
-              className="w-full bg-accent1 text-white placeholder-gray-400 outline-none resize-none font-medium"
+              className=" bg-accent1 text-white placeholder-gray-400 outline-none resize-none font-medium"
               name="message"
               placeholder="Message"
               rows="4"
@@ -96,6 +105,19 @@ export const Contact = () => {
             SEND MESSAGE
           </button>
         </form>
+        <div className="w-fit flex items-start text-lg text-darkbg bg-sandy rounded-lg shadow-md fixed top-4 right-4 z-50">
+          {contactMessage && (
+            <p className="p-3">
+              I'll get back to you soon!{" "}
+              <span
+                onClick={dismissHandle}
+                className="items-center cursor-pointer text-xs"
+              >
+                ❌
+              </span>
+            </p>
+          )}
+        </div>
       </div>
     </section>
   );

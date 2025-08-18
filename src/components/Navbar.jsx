@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { IoMenu } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 
-export const Navbar = ({ toggleExpand }) => {
-  const [clicked, setClicked] = useState(false);
+export const Navbar = ({ toggleExpand, forceExpanded }) => {
+  const [clicked, setClicked] = useState(forceExpanded);
   const [isActive, setIsActive] = useState("home");
 
   const navItems = [
@@ -20,35 +20,40 @@ export const Navbar = ({ toggleExpand }) => {
 
   const handleMenuClick = navItem => {
     setIsActive(navItem.id);
-    setClicked(false);
+    setClicked(forceExpanded ? true : false);
 
     const section = document.getElementById(navItem.id);
     if (section) {
       section.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
-    if (toggleExpand) toggleExpand();
+    if (!forceExpanded) {
+      setClicked(false);
+      if (toggleExpand) toggleExpand();
+    }
   };
 
   return (
     <div className="flex flex-col h-full items-center bg-accent2">
       {/* Toggle Icon */}
-      <div className="text-2xl flex md:text-3xl text-sandy bg-accent1 w-full">
-        {clicked ? (
-          <RxCross2 onClick={handleIconClick} />
-        ) : (
-          <IoMenu onClick={handleIconClick} />
-        )}
-      </div>
+      {!forceExpanded && (
+        <div className="text-2xl flex cursor-pointer md:text-3xl text-sandy bg-accent1 w-full">
+          {clicked ? (
+            <RxCross2 onClick={handleIconClick} />
+          ) : (
+            <IoMenu onClick={handleIconClick} />
+          )}
+        </div>
+      )}
 
       {/* Menu */}
       <nav className="flex text-sandy py-5 flex-col">
-        {clicked ? (
+        {forceExpanded || clicked ? (
           navItems.map((navItem, index) => (
             <button
               key={index}
               onClick={() => handleMenuClick(navItem)}
-              className={`px-3 py-2 ${
+              className={`px-3 py-2 cursor-pointer ${
                 isActive === navItem.id ? "text-sky font-bold" : ""
               }`}
             >
@@ -57,7 +62,7 @@ export const Navbar = ({ toggleExpand }) => {
           ))
         ) : (
           <button
-            className="p-7 sm:text-lg md:text-base"
+            className="p-7 sm:text-lg md:text-base cursor-pointer"
             style={{ transform: "rotate(90deg)" }}
             onClick={handleIconClick}
           >

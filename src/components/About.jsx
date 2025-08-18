@@ -90,7 +90,7 @@ export const About = () => {
 
       {/* Socials */}
       <section className="flex-none h-16 bg-gradient-to-b from-accent1 to-darkcard">
-        <div className="flex flex-row gap-12 justify-center items-center h-full max-sm:gap-6">
+        <div className="flex flex-row gap-12 justify-center items-center h-full max-sm:gap-14">
           {socialLinks.map((social, i) => {
             const Icon = social.icon;
             return (

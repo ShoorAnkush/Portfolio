@@ -21,9 +21,9 @@ export const Hero = () => {
         </div>
 
         {/* Animated Code */}
-        <p className="text-lg md:text-xl max-sm:text-sm font-mono text-card mt-2">
+        <p className="text-lg md:text-xl max-sm:text-xs font-mono text-card mt-2">
           &lt;code&gt;I Create{" "}
-          <span className="text-sky max-sm:text-sm">
+          <span className="text-sky max-sm:text-xs">
             <Typewriter
               words={["UI Flows", "Website Designs"]}
               loop={true}
@@ -37,7 +37,18 @@ export const Hero = () => {
           &lt;/code&gt;
         </p>
 
-        <button className="bg-accent1 hover:bg-sky text-sandy font-bold py-2 px-6 max-sm:py-1 max-sm:px-4 max-sm:text-sm rounded-lg mt-4 transition">
+        <button
+          onClick={() => {
+            const projectsSection = document.getElementById("projects");
+            if (projectsSection) {
+              projectsSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }
+          }}
+          className="bg-accent1 cursor-pointer hover:bg-sky text-sandy font-bold py-2 px-6 max-sm:py-2 max-sm:px-4 max-sm:text-sm rounded-lg mt-4 transition"
+        >
           See Projects
         </button>
       </div>
@@ -59,10 +70,7 @@ export const Hero = () => {
       </div>
 
       {/* Contact */}
-      <div
-        id="contact"
-        className="flex justify-center items-center bg-sky py-8 max-sm:py-4"
-      >
+      <div id="contact" className="flex justify-center items-center bg-sky">
         <Contact />
       </div>
     </div>
