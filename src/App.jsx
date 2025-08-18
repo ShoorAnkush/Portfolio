@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import { About } from "./components/About";
 import { Hero } from "./components/Hero";
-import { Navbar } from "./components/NavBar";
+import { Navbar } from "./components/Navbar";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { IoMenu } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
