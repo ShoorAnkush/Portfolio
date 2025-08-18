@@ -1,6 +1,6 @@
 import { FaLinkedin, FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaDownload } from "react-icons/fa6";
-import profilepic from "../assets/images/profilepic.jpg";
+import profile from "../assets/images/profile.jpg";
 
 export const About = () => {
   const socialLinks = [
@@ -14,9 +14,9 @@ export const About = () => {
       {/* Profile */}
       <div className="flex-none py-6 bg-gradient-to-b from-accent1 to-darkcard flex flex-col items-center shadow-lg">
         <img
-          src={profilepic}
+          src={profile}
           alt="Ankush Shoor"
-          className="rounded-full object-cover mb-3 size-28 border-4 border-sandy shadow-md max-sm:w-20 max-sm:h-20"
+          className="rounded-full object-bottom object-cover mb-3 size-34 border-4 border-sandy shadow-md max-sm:w-20 max-sm:h-20"
         />
         <div className="text-2xl md:text-3xl max-sm:text-xl font-bold">
           Ankush Shoor

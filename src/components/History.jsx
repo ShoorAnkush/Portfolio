@@ -8,9 +8,10 @@ export const History = () => {
       period: "Feburary 2019 to March 2023",
       role: "Software Engineer",
       bullets: [
-        "Built reusable React components and design system",
-        "Improved Lighthouse performance score from 68 → 92",
-        "Collaborated with design to implement responsive layouts",
+        "Built responsive web applications using React, HTML, CSS, and Tailwind; developed reusable components and implemented state management for seamless UX",
+        "Developed an e-commerce platform for healthcare professionals to order medicines, integrating APIs and ensuring a responsive, user-friendly design across devices",
+        "Conducted code reviews, implemented accessibility and performance best practices, and collaborated with designers and backend teams to deliver scalable, maintainable front-end solutions",
+        "Converted static HTML websites to React and successfully migrated them to AWS cloud, improving scalability, maintainability, and performance.",
       ],
     },
   ];
