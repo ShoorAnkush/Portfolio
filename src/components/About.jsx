@@ -36,7 +36,7 @@ export const About = () => {
             </span>
             <span className="flex-1 mx-2 "></span>
             <span className="font-normal max-sm:text-sm">
-              a_shoor@outlook.com
+              ankushshoor96@gmail.com
             </span>
           </div>
           <div className="flex items-center max-sm:flex-col max-sm:items-start">
