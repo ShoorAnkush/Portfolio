@@ -21,7 +21,7 @@ export const Hero = () => {
         </div>
 
         {/* Animated Code */}
-        <p className="text-lg md:text-xl max-sm:text-xs font-mono text-card mt-2">
+        <p className="text-lg md:text-xl max-sm:text-xs font-mono text-accent1 md:text-card mt-2">
           &lt;code&gt;I Create{" "}
           <span className="text-sky max-sm:text-xs">
             <Typewriter

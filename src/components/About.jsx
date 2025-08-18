@@ -79,7 +79,8 @@ export const About = () => {
         {/* Resume */}
         <section className="flex justify-center py-6 max-sm:py-4">
           <a
-            href=""
+            href="/AnkushShoor.pdf"
+            download
             className="px-6 py-2 bg-sandy text-darkbg font-semibold rounded-full shadow-md flex items-center gap-2 hover:bg-peach transition text-sm max-sm:px-4 max-sm:py-1"
           >
             <FaDownload className="max-sm:text-sm" />
