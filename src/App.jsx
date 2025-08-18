@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { About } from "./components/About";
 import { Hero } from "./components/Hero";
@@ -11,6 +11,15 @@ function App() {
   const [isNavbarExpanded, setIsNavbarExpanded] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+  const [isDesktop, SetIsDesktop] = useState(window.innerWidth >= 768);
+
+  useEffect(() => {
+    const handleResize = () => SetIsDesktop(window.innerWidth >= 768);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <>
@@ -63,13 +72,12 @@ function App() {
     grid-cols-1 md:grid-rows-none "
         style={{
           // desktop dynamic widths
-          gridTemplateColumns:
-            window.innerWidth >= 768
-              ? isNavbarExpanded
-                ? "20% 65% 15%"
-                : "20% 75% 5%"
-              : undefined,
-          gridTemplateAreas: `"about hero navbar"`,
+          gridTemplateColumns: isDesktop
+            ? isNavbarExpanded
+              ? "20% 65% 15%"
+              : "20% 75% 5%"
+            : "1fr",
+          gridTemplateAreas: isDesktop ? `"about hero navbar"` : `"hero"`,
         }}
       >
         {/* About column */}
