@@ -1,107 +1,92 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import { About } from "./components/About";
 import { Hero } from "./components/Hero";
 import { Navbar } from "./components/Navbar";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { IoMenu } from "react-icons/io5";
-import { RxCross2 } from "react-icons/rx";
+import { Spin as Hamburger } from "hamburger-react";
 
 function App() {
   const [isNavbarExpanded, setIsNavbarExpanded] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
-  const [isDesktop, SetIsDesktop] = useState(window.innerWidth >= 768);
-
-  useEffect(() => {
-    const handleResize = () => SetIsDesktop(window.innerWidth >= 768);
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <>
       {/* Mobile top bar */}
-      <div className="absolute top-0 left-0 right-0 z-50 flex justify-between items-center p-4 md:hidden">
-        {/* Left: About Close */}
+      <div className="absolute top-0 left-0 right-0 z-50 flex justify-between items-center p-4 lg:hidden m-3 md:m-6">
+        {/* Left: About toggle */}
         <button
           onClick={() => {
             setIsAboutOpen(prev => !prev);
             setIsNavbarOpen(false);
           }}
-          className="text-white text-2xl"
+          className={`text-darkcard text-2xl transition-transform duration-300 ease-in-out 
+            ${isAboutOpen ? "rotate-90 opacity-70" : "rotate-0 opacity-100"} 
+            bg-accent4/40 rounded-full p-3`}
         >
           <BsThreeDotsVertical />
         </button>
 
-        {/* Right: Navbar Close */}
-        <button
-          onClick={() => {
-            setIsAboutOpen(false);
-            setIsNavbarOpen(prev => !prev);
-          }}
-          className="text-white text-2xl"
-        >
-          {isNavbarOpen ? <RxCross2 /> : <IoMenu />}
+        {/* Right: Navbar toggle */}
+        <button className="bg-accent4/40 rounded-full">
+          <Hamburger
+            color="#13202b"
+            size={22}
+            rounded
+            toggled={isNavbarOpen}
+            toggle={() => {
+              setIsAboutOpen(false);
+              setIsNavbarOpen(prev => !prev);
+            }}
+            label="Toggle navigation menu"
+          />
         </button>
       </div>
 
-      {/* Left: About Open */}
-      {isAboutOpen && (
-        <div className="fixed top-0 z-40 flex">
-          <div className="w-72 overflow-y-auto">
-            <About />
-          </div>
-        </div>
-      )}
-
-      {/* Right: Navbar Open */}
-      {isNavbarOpen && (
-        <div className="fixed z-40 flex right-0">
-          <div className="h-screen pt-22 shadow-2xl bg-accent2">
-            <Navbar forceExpanded />
-          </div>
-        </div>
-      )}
-
-      {/* Desktop */}
+      {/* Mobile: About slide-in */}
       <div
-        className="grid w-full h-screen transition-all duration-300 bg-darkbg p-0 md:p-4 box-border overflow-hidden
-    grid-cols-1 md:grid-rows-none "
-        style={{
-          // desktop dynamic widths
-          gridTemplateColumns: isDesktop
-            ? isNavbarExpanded
-              ? "20% 65% 15%"
-              : "20% 75% 5%"
-            : "1fr",
-          gridTemplateAreas: isDesktop ? `"about hero navbar"` : `"hero"`,
-        }}
+        className={`fixed top-0 left-0 h-full z-40 flex transition-transform duration-500 ease-in-out
+          ${isAboutOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
-        {/* About column */}
-        <div
-          className="hidden md:block h-full overflow-hidden shadow-2xl"
-          style={{ gridArea: "about" }}
-        >
+        <div className="w-72 overflow-y-auto shadow-2xl bg-accent2">
+          <About />
+        </div>
+      </div>
+
+      {/* Mobile: Navbar slide-in */}
+      <div
+        className={`fixed top-0 right-0 h-full z-40 flex transition-transform duration-500 ease-in-out
+    ${isNavbarOpen ? "translate-x-0" : "translate-x-full"}`}
+      >
+        <div className="w-32 h-screen pt-22 shadow-2xl bg-accent2">
+          <Navbar forceExpanded />
+        </div>
+      </div>
+
+      {/* Desktop & Mobile/Tablet grid */}
+      <div
+        className={`grid w-full h-screen transition-all duration-300 bg-darkbg p-0 lg:p-4 box-border overflow-hidden
+    grid-cols-1 ${
+      isNavbarExpanded
+        ? "lg:grid-cols-[20%_65%_15%]"
+        : "lg:grid-cols-[20%_75%_5%]"
+    }
+  `}
+      >
+        {/* About column (desktop only) */}
+        <div className="hidden lg:block h-full overflow-hidden shadow-2xl">
           <About />
         </div>
 
         {/* Hero column */}
-        <div
-          className="h-full overflow-y-auto 
-          hide-scrollbar scroll-smooth shadow-2xl"
-          style={{ gridArea: "hero" }}
-        >
+
+        <div className="h-full overflow-y-auto hide-scrollbar scroll-smooth shadow-2xl">
           <Hero />
         </div>
 
-        {/* Navbar column */}
-        <div
-          className="hidden md:block bg-accent2 shadow-2xl"
-          style={{ gridArea: "navbar" }}
-        >
+        {/* Navbar column (desktop only) */}
+        <div className="hidden lg:block bg-accent2 shadow-2xl">
           <Navbar toggleExpand={() => setIsNavbarExpanded(prev => !prev)} />
         </div>
       </div>

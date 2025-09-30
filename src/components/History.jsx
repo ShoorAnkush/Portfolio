@@ -1,18 +1,33 @@
 import { HistoryCard } from "./HistoryCard";
+import { motion } from "framer-motion";
+import SparklesCore from "./ui/SparklesCore";
 
 export const History = () => {
   const experience = [
     {
+      title: "Freelance Front-End Developer",
+      location: "Toronto, Canada",
+      period: "Jan 2025 – Present",
+      role: "Freelancer",
+      bullets: [
+        "Built and deployed React apps (Movie Finder, Chatbot, Pokedex) showcasing API integration & state management",
+        "Designed reusable components with Hooks + Context API for seamless UX",
+        "Deployed projects on Netlify with CI/CD pipelines",
+      ],
+      tech: ["React", "Context API", "Netlify", "CI/CD"],
+    },
+    {
       title: "Tata Consultancy Services",
       location: "Delhi, India",
-      period: "Feburary 2019 to March 2023",
+      period: "Feb 2019 – Mar 2023",
       role: "Software Engineer",
       bullets: [
-        "Built responsive web applications using React, HTML, CSS, and Tailwind; developed reusable components and implemented state management for seamless UX",
-        "Developed an e-commerce platform for healthcare professionals to order medicines, integrating APIs and ensuring a responsive, user-friendly design across devices",
-        "Conducted code reviews, implemented accessibility and performance best practices, and collaborated with designers and backend teams to deliver scalable, maintainable front-end solutions",
-        "Converted static HTML websites to React and successfully migrated them to AWS cloud, improving scalability, maintainability, and performance.",
+        "Developed responsive emails & web pages in Salesforce Marketing Cloud, boosting engagement by 20%",
+        "Conducted QA & A/B testing, reducing bounce rates by 15%",
+        "Collaborated with Agile teams to deliver scalable client solutions",
+        "Recognized with Spot & Innovation Awards for delivery and process improvements",
       ],
+      tech: ["SFMC", "AMPscript", "QA Testing", "Agile"],
     },
   ];
 
@@ -31,29 +46,78 @@ export const History = () => {
     },
   ];
 
-  return (
-    <section className="w-full">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 m-4">
-        {/* Experience */}
-        <div>
-          <h2 className="text-sm md:text-2xl font-bold tracking-wide uppercase text-peach mb-2">
-            Experience
-          </h2>
-          {experience.map((exp, index) => (
-            <HistoryCard key={index} {...exp} />
-          ))}
-        </div>
+  // Variants for staggered animation
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15, // cards animate one after another
+      },
+    },
+  };
 
-        {/* Education */}
-        <div>
-          <h2 className="text-sm md:text-2xl font-bold tracking-wide uppercase text-peach mb-2">
-            Education
-          </h2>
-          {education.map((edu, index) => (
-            <HistoryCard key={index} {...edu} />
-          ))}
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        ease: [0.25, 0.1, 0.25, 1], // smoother cubic-bezier easing
+      },
+    },
+  };
+
+  return (
+    <section className="w-full py-12 px-4 sm:px-8  bg-darkbg">
+      <SparklesCore particleColor="#ffd166" className="w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {/* Experience */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <motion.h2
+              className="text-3xl font-bold tracking-wide uppercase text-peach mb-8 relative"
+              variants={itemVariants}
+            >
+              Experience
+              <span className="block w-12 h-1 bg-sandy mt-2 rounded"></span>
+            </motion.h2>
+
+            {experience.map((exp, index) => (
+              <motion.div key={index} className="mb-8" variants={itemVariants}>
+                <HistoryCard {...exp} />
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Education */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <motion.h2
+              className="text-3xl font-bold tracking-wide uppercase text-peach mb-8 relative"
+              variants={itemVariants}
+            >
+              Education
+              <span className="block w-12 h-1 bg-sandy mt-2 rounded"></span>
+            </motion.h2>
+
+            {education.map((edu, index) => (
+              <motion.div key={index} className="mb-8" variants={itemVariants}>
+                <HistoryCard {...edu} />
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
-      </div>
+      </SparklesCore>
     </section>
   );
 };

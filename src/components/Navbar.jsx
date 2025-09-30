@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { IoMenu } from "react-icons/io5";
-import { RxCross2 } from "react-icons/rx";
+import { Spin as Hamburger } from "hamburger-react";
 
 export const Navbar = ({ toggleExpand, forceExpanded }) => {
   const [clicked, setClicked] = useState(forceExpanded);
@@ -38,11 +37,12 @@ export const Navbar = ({ toggleExpand, forceExpanded }) => {
       {/* Toggle Icon */}
       {!forceExpanded && (
         <div className="text-2xl flex cursor-pointer md:text-3xl text-sandy bg-accent1 w-full">
-          {clicked ? (
-            <RxCross2 onClick={handleIconClick} />
-          ) : (
-            <IoMenu onClick={handleIconClick} />
-          )}
+          <Hamburger
+            size={24}
+            rounded
+            toggled={clicked}
+            toggle={handleIconClick}
+          />
         </div>
       )}
 
