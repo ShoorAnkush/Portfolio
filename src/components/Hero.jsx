@@ -7,8 +7,8 @@ import SparklesCore from "./ui/SparklesCore";
 
 export const Hero = () => {
   return (
-    <div className="flex px-4">
-      <div className="flex flex-col gap-3 px-4 py-4 bg-cover max-sm:px-2 max-sm:py-2">
+    <div className="px-0 md:flex md:px-4 justify-center">
+      <div className="flex flex-col justify-center gap-3 px-4 py-4 bg-cover max-sm:px-2 max-sm:py-2">
         {/* Banner */}
         <div
           id="home"
@@ -58,7 +58,7 @@ export const Hero = () => {
         {/* History */}
         <div
           id="history"
-          className="flex justify-center items-center bg-darkbg py-8 max-sm:py-4"
+          className="flex justify-center items-center bg-darkbg py-6 max-sm:py-4"
         >
           <History />
         </div>
@@ -66,7 +66,7 @@ export const Hero = () => {
         {/* Projects */}
         <div
           id="projects"
-          className="flex justify-center items-center bg-darkbg py-8 max-sm:py-4"
+          className="flex justify-center items-center bg-darkbg py-6 max-sm:py-4"
         >
           <Projects />
         </div>
