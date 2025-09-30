@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       {/* Mobile top bar */}
-      <div className="absolute top-0 left-0 right-0 z-50 flex justify-between items-center lg:hidden m-6 md:m-6">
+      <div className="absolute top-0 left-0 right-0 z-50 flex justify-between items-center lg:hidden m-6 md:m-12">
         {/* Left: About toggle */}
         <button
           onClick={() => {
